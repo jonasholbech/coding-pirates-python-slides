@@ -40,7 +40,7 @@
       <section>
         <h2>Hvordan starter jeg skidtet?</h2>
         <h6>Og hvordan kører jeg et script?</h6>
-        <ol>
+        <ol style="font-size:1.4rem;">
           <li>Start Spigot</li>
           <li>Åbn Minecraft og vælg Multiplayer</li>
           <li>Åbn Visual Studio Code (vscode)</li>
@@ -142,6 +142,29 @@ mc.setBlocks(x1, y1, z1, x2, y2, z2, block.WOOD.id)
             <td>FIRE</td>
           </tr>
         </table>
+      </section>
+      <section>
+        <h3>Hvor er spilleren?</h3>
+        <pre><code class="python" data-trim data-noescape>
+#lav en variabel (pos)
+#der indeholder spillerens koordinater
+pos = mc.player.getPos()
+
+#Nu har vi pos.x, pos.y og pos.z
+        </code></pre>
+      </section>
+      <section>
+        <img data-src="gfx/coordinate-system.png" alt="">
+      </section>
+      <section>
+        <h3>Gør noget mange gange</h3>
+        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
+while True:
+    pos = mc.player.getPos()
+    mc.setBlock(pos.x, pos.y, pos.z, block.TNT.id)
+    time.sleep(0.1)
+        </code></pre>
+        <p>Du kan stoppe scriptet ved at trykke ctrl og c i terminalen</p>
       </section>
     </div>
   </div>
