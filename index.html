@@ -203,6 +203,27 @@ def build_tower(height):
           </code></pre>
       </section>
       <section>
+        <h3>Organiser din kode</h3>
+        <h6>tower_builder.py</h6>
+        <pre><code class="python" data-trim data-noescape data-line-numbers="0|2|3-8|1|0">
+          import mcpi.block as block
+          def build_tower(mc, height):
+              pos = mc.player.getPos()
+              mc.setBlocks(pos.x, pos.y, pos.z, 
+                           pos.x, pos.y + height, pos.z, 
+                           block.STONE.id)
+              mc.setBlock(pos.x, pos.y + height + 1, pos.z, 
+                          block.GOLD_BLOCK.id)
+        </code></pre>
+        <h6>game.py</h6>
+        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-3|4">
+          import tower_builder
+          import mcpi.minecraft as minecraft
+          mc = minecraft.Minecraft.create()
+          tower_builder.build_tower(mc, 10)
+        </code></pre>        
+      </section>
+      <section>
         <h3>Første øvelse</h3>
         <h6>Kan vi give vores tårne forskellige typer tag?</h6>
       </section>
