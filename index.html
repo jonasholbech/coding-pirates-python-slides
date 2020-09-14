@@ -141,23 +141,37 @@ mc = minecraft.Minecraft.create()
       </section>
       <section>
         <h3>Lad os bygge tårne</h3>
-        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-5|6|7-10|11|12-15|0">
-            pos = mc.player.getPos()
-            # første tårn - 10 blokke
-            mc.setBlocks(pos.x, pos.y, pos.z, 
-                         pos.x, pos.y + 10, pos.z, block.STONE.id)
-            mc.setBlock(pos.x, pos.y + 11, pos.z, block.GOLD_BLOCK.id)
-            time.sleep(5)
-            # andet tårn - 15 blokke
-            mc.setBlocks(pos.x, pos.y, pos.z, 
-                         pos.x, pos.y + 15, pos.z, block.STONE.id)
-            mc.setBlock(pos.x, pos.y + 16, pos.z, block.GOLD_BLOCK.id)
-            time.sleep(5)
-            # tredje tårn - 20 blokke
-            mc.setBlocks(pos.x, pos.y, pos.z, 
-                         pos.x, pos.y + 20, pos.z, block.STONE.id)
-            mc.setBlock(pos.x, pos.y + 21, pos.z, block.GOLD_BLOCK.id)
-          </code></pre>
+        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|3-5|6|7-11">
+          # første tårn - 10 blokke
+          pos = mc.player.getPos()
+          mc.setBlocks(pos.x, pos.y, pos.z, 
+                        pos.x, pos.y + 10, pos.z, block.STONE.id)
+          mc.setBlock(pos.x, pos.y + 11, pos.z, block.GOLD_BLOCK.id)
+          time.sleep(5)
+          # andet tårn - 15 blokke
+          pos = mc.player.getPos()
+          mc.setBlocks(pos.x, pos.y, pos.z, 
+                        pos.x, pos.y + 15, pos.z, block.STONE.id)
+          mc.setBlock(pos.x, pos.y + 16, pos.z, block.GOLD_BLOCK.id)
+          ...
+        </code></pre>
+      </section>
+      <section data-transition="none">
+        <h3>Lad os bygge tårne</h3>
+        <pre><code class="python" data-trim data-noescape data-line-numbers="7|8-12|0">
+          ...
+          # andet tårn - 15 blokke
+          pos = mc.player.getPos()
+          mc.setBlocks(pos.x, pos.y, pos.z, 
+                        pos.x, pos.y + 15, pos.z, block.STONE.id)
+          mc.setBlock(pos.x, pos.y + 16, pos.z, block.GOLD_BLOCK.id)
+          time.sleep(5)
+          # tredje tårn - 20 blokke
+          pos = mc.player.getPos()
+          mc.setBlocks(pos.x, pos.y, pos.z, 
+                        pos.x, pos.y + 20, pos.z, block.STONE.id)
+          mc.setBlock(pos.x, pos.y + 21, pos.z, block.GOLD_BLOCK.id)
+        </code></pre>
       </section>
       <section>
         <h3>Kan vi gøre noget smartere?</h3>
