@@ -19,22 +19,22 @@
   <div class="reveal">
     <div class="slides">
       <section>
-        <h1>Minecraft &amp; Python, dag 3</h1>
+        <h1>Minecraft &amp; Python, dag 2</h1>
       </section>
       <section>
         <ol>
-          <li>Goddag</li>
-          <li>Lektier fra sidst</li>
-          <li>Hvordan starter jeg skidtet?</li>
-          <li>Hvordan kører jeg et script?</li>
-          <li>Genopfriskning af API'et</li>
-          <li>Hvordan gør man den samme ting flere gange?</li>
-          <li>Individuelle øvelser</li>
-          <li>Lektier til næste gang</li>
+          <li>god dag</li>
+          <li>lektier fra sidst</li>
+          <li>hvordan starter jeg skidtet</li>
+          <li>hvordan kører jeg et script</li>
+          <li>introduktion til API’et </li>
+          <li>live eksempel</li>
+          <li>individuelle øvelser</li>
+          <li>lektier</li>
         </ol>
       </section>
       <section>
-        <h2>Lektier fra sidst</h2>
+        <h2>Lektier fra sidst?</h2>
         <p>Har alle lavet deres?</p>
       </section>
       <section>
@@ -51,6 +51,10 @@
         </ol>
       </section>
       <section>
+        <h3>Introduktion til API'et</h3>
+        <p><a href="https://www.stuffaboutcode.com/p/minecraft-api-reference.html">https://www.stuffaboutcode.com/p/minecraft-api-reference.html</a></p>
+      </section>
+      <section>
         <h3>Vores starter kode</h3>
         <p>Det her skal vi bruge i alle projekter</p>
         <pre><code data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
@@ -62,17 +66,17 @@ mc = minecraft.Minecraft.create()
 </code></pre>
       </section>
       <section>
-        <h3>Genopfriskning af API'et</h3>
-        <p><a target="_blank" href="https://www.stuffaboutcode.com/p/minecraft-api-reference.html">https://www.stuffaboutcode.com/p/minecraft-api-reference.html</a></p>
-        <h6>Hvad er det nu man kan gøre?</h6>
-        <ul style="font-size:1.4rem;" data-line-numbers="1|2|3">
-          <li class="fragment highlight-current-blue"><code>mc.player.getPos()</code></li>
-          <li class="fragment highlight-current-blue"><code>mc.player.setPos(x, y, z)</code></li>
-          <li class="fragment highlight-current-blue"><code>mc.setBlock(x, y, z, block.LAVA)</code></li>
-        </ul>
-      </section>
-      <section>
-        <img data-src="gfx/coordinate-system.png" alt="">
+        <h3>Et par brugbare metoder</h3>
+        <pre><code data-trim data-noescape data-line-numbers="1-2|4-5|7-8">
+//skriv en besked i chatten
+mc.postToChat("Hej Verden")
+
+//Sæt en træ-blok
+mc.setBlock(x, y, z, block.WOOD.id)
+
+//lav en firkant af blokke
+mc.setBlocks(x1, y1, z1, x2, y2, z2, block.WOOD.id)
+     </code></pre>
       </section>
       <section>
         <h3>Eksempler på blok-navne</h3>
@@ -140,57 +144,27 @@ mc = minecraft.Minecraft.create()
         </table>
       </section>
       <section>
-        <h3>Lad os bygge tårne</h3>
-        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-5|6|7-10|11|12-15|0">
-            pos = mc.player.getPos()
-            # første tårn - 10 blokke
-            mc.setBlocks(pos.x, pos.y, pos.z, 
-                         pos.x, pos.y + 10, pos.z, block.STONE.id)
-            mc.setBlock(pos.x, pos.y + 11, pos.z, block.GOLD_BLOCK.id)
-            time.sleep(5)
-            # andet tårn - 15 blokke
-            mc.setBlocks(pos.x, pos.y, pos.z, 
-                         pos.x, pos.y + 15, pos.z, block.STONE.id)
-            mc.setBlock(pos.x, pos.y + 16, pos.z, block.GOLD_BLOCK.id)
-            time.sleep(5)
-            # tredje tårn - 20 blokke
-            mc.setBlocks(pos.x, pos.y, pos.z, 
-                         pos.x, pos.y + 20, pos.z, block.STONE.id)
-            mc.setBlock(pos.x, pos.y + 21, pos.z, block.GOLD_BLOCK.id)
-          </code></pre>
-      </section>
-      <section>
-        <h3>Kan vi gøre noget smartere?</h3>
-      </section>
-      <section>
-        <h3>Don't repeat yourself</h3>
-        <h6>Funktioner</h6>
-        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2|3-5|6-7|0">
-def build_tower(height):
-    pos = mc.player.getPos()
-    mc.setBlocks(pos.x, pos.y, pos.z, 
-                 pos.x, pos.y + height, pos.z, 
-                 block.STONE.id)
-    mc.setBlock(pos.x, pos.y + height + 1, pos.z, 
-                block.GOLD_BLOCK.id)
+        <h3>Hvor er spilleren?</h3>
+        <pre><code class="python" data-trim data-noescape>
+#lav en variabel (pos)
+#der indeholder spillerens koordinater
+pos = mc.player.getPos()
+
+#Nu har vi pos.x, pos.y og pos.z
         </code></pre>
       </section>
       <section>
-        <h3>Lad os bygge tårne - igen</h3>
-        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|4-5|7-8|0">
-            # første tårn - 10 blokke
-            build_tower(10)
-            time.sleep(5)
-            # andet tårn - 15 blokke            
-            build_tower(15)
-            time.sleep(5)
-            # tredje tårn - 20 blokke            
-            build_tower(20)
-          </code></pre>
+        <img data-src="gfx/coordinate-system.png" alt="">
       </section>
       <section>
-        <h3>Første øvelse</h3>
-        <h6>Kan vi give vores tårne forskellige typer tag?</h6>
+        <h3>Gør noget mange gange</h3>
+        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
+while True:
+    pos = mc.player.getPos()
+    mc.setBlock(pos.x, pos.y, pos.z, block.TNT.id)
+    time.sleep(0.1)
+        </code></pre>
+        <p>Du kan stoppe scriptet ved at trykke ctrl og c i terminalen</p>
       </section>
     </div>
   </div>
