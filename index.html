@@ -1,251 +1,45 @@
-<!doctype html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-  <title>Python vs Minecraft, dag 2</title>
-
-  <link rel="stylesheet" href="dist/reset.css">
-  <link rel="stylesheet" href="dist/reveal.css">
-  <link rel="stylesheet" href="dist/theme/black.css" id="theme">
-
-  <!-- Theme used for syntax highlighted code -->
-  <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-</head>
-
-<body>
-  <div class="reveal">
-    <div class="slides">
-      <section>
-        <h1>Minecraft &amp; Python, dag 3</h1>
-      </section>
-      <section>
-        <ol>
-          <li>Goddag</li>
-          <li>Lektier fra sidst</li>
-          <li>Hvordan starter jeg skidtet?</li>
-          <li>Hvordan kører jeg et script?</li>
-          <li>Genopfriskning af API'et</li>
-          <li>Hvordan gør man den samme ting flere gange?</li>
-          <li>Individuelle øvelser</li>
-          <li>Lektier til næste gang</li>
-        </ol>
-      </section>
-      <section>
-        <h2>Lektier fra sidst</h2>
-        <p>Har alle lavet deres?</p>
-      </section>
-      <section>
-        <h2>Hvordan starter jeg skidtet?</h2>
-        <h6>Og hvordan kører jeg et script?</h6>
-        <ol style="font-size:1.4rem;">
-          <li>Start Spigot</li>
-          <li>Åbn Minecraft og vælg Multiplayer</li>
-          <li>Åbn Visual Studio Code (vscode)</li>
-          <li>Åbn code mappen fra vscode</li>
-          <li>Vælg View > Terminal i top-menuen.</li>
-          <li>Lav en ny .py fil, eller arbejd videre på en eksisterende</li>
-          <li>Når du er klar, kør dit program ved at skrive python mitfilnavn.py</li>
-        </ol>
-      </section>
-      <section>
-        <h3>Vores starter kode</h3>
-        <p>Det her skal vi bruge i alle projekter</p>
-        <pre><code data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
-import mcpi.minecraft as minecraft
-import mcpi.block as block
-import mcpi.entity as entity
-import time
-mc = minecraft.Minecraft.create()
-</code></pre>
-      </section>
-      <section>
-        <h3>Genopfriskning af API'et</h3>
-        <p><a target="_blank" href="https://www.stuffaboutcode.com/p/minecraft-api-reference.html">https://www.stuffaboutcode.com/p/minecraft-api-reference.html</a></p>
-        <h6>Hvad er det nu man kan gøre?</h6>
-        <ul style="font-size:1.4rem;" data-line-numbers="1|2|3">
-          <li class="fragment highlight-current-blue"><code>mc.player.getPos()</code></li>
-          <li class="fragment highlight-current-blue"><code>mc.player.setPos(x, y, z)</code></li>
-          <li class="fragment highlight-current-blue"><code>mc.setBlock(x, y, z, block.LAVA)</code></li>
-        </ul>
-      </section>
-      <section>
-        <img data-src="gfx/coordinate-system.png" alt="">
-      </section>
-      <section>
-        <h3>Eksempler på blok-navne</h3>
-        <table style="font-size:1.4rem">
-          <tr>
-            <td>AIR </td>
-            <td>STONE </td>
-            <td>GRASS </td>
-          </tr>
-          <tr>
-            <td>DIRT </td>
-            <td>COBBLESTONE </td>
-            <td>WOOD_PLANKS </td>
-          </tr>
-          <tr>
-            <td>SAPLING </td>
-            <td>BEDROCK </td>
-            <td>WATER </td>
-          </tr>
-          <tr>
-            <td>LAVA </td>
-            <td>SAND </td>
-            <td>GRAVEL </td>
-          </tr>
-          <tr>
-            <td>GOLD_ORE </td>
-            <td>IRON_ORE </td>
-            <td>COAL_ORE </td>
-          </tr>
-          <tr>
-            <td>WOOD </td>
-            <td>LEAVES </td>
-            <td>GLASS </td>
-          </tr>
-          <tr>
-            <td>SANDSTONE </td>
-            <td>BED </td>
-            <td>RAIL_POWERED </td>
-          </tr>
-          <tr>
-            <td>RAIL_DETECTOR </td>
-            <td>COBWEB </td>
-            <td>GRASS_TALL </td>
-          </tr>
-          <tr>
-            <td>DEAD_BUSH </td>
-            <td>WOOL </td>
-            <td>FLOWER_YELLOW </td>
-          </tr>
-          <tr>
-            <td>FLOWER_CYAN </td>
-            <td>MUSHROOM_BROWN </td>
-            <td>MUSHROOM_RED </td>
-          </tr>
-          <tr>
-            <td>GOLD_BLOCK </td>
-            <td>IRON_BLOCK </td>
-            <td>STONE_SLAB_DOUBL</td>
-          </tr>
-          <tr>
-            <td>STONE_SLAB </td>
-            <td>TNT</td>
-            <td>FIRE</td>
-          </tr>
-        </table>
-      </section>
-      <section>
-        <h3>Lad os bygge tårne</h3>
-        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|3-5|6|7-11">
-          # første tårn - 10 blokke
-          pos = mc.player.getPos()
-          mc.setBlocks(pos.x, pos.y, pos.z, 
-                        pos.x, pos.y + 10, pos.z, block.STONE.id)
-          mc.setBlock(pos.x, pos.y + 11, pos.z, block.GOLD_BLOCK.id)
-          time.sleep(5)
-          # andet tårn - 15 blokke
-          pos = mc.player.getPos()
-          mc.setBlocks(pos.x, pos.y, pos.z, 
-                        pos.x, pos.y + 15, pos.z, block.STONE.id)
-          mc.setBlock(pos.x, pos.y + 16, pos.z, block.GOLD_BLOCK.id)
-          ...
-        </code></pre>
-      </section>
-      <section data-transition="none">
-        <h3>Lad os bygge tårne</h3>
-        <pre><code class="python" data-trim data-noescape data-line-numbers="7|8-12|0">
-          ...
-          # andet tårn - 15 blokke
-          pos = mc.player.getPos()
-          mc.setBlocks(pos.x, pos.y, pos.z, 
-                        pos.x, pos.y + 15, pos.z, block.STONE.id)
-          mc.setBlock(pos.x, pos.y + 16, pos.z, block.GOLD_BLOCK.id)
-          time.sleep(5)
-          # tredje tårn - 20 blokke
-          pos = mc.player.getPos()
-          mc.setBlocks(pos.x, pos.y, pos.z, 
-                        pos.x, pos.y + 20, pos.z, block.STONE.id)
-          mc.setBlock(pos.x, pos.y + 21, pos.z, block.GOLD_BLOCK.id)
-        </code></pre>
-      </section>
-      <section>
-        <h3>Kan vi gøre noget smartere?</h3>
-      </section>
-      <section>
-        <h3>Don't repeat yourself</h3>
-        <h6>Funktioner</h6>
-        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2|3-5|6-7|0">
-def build_tower(height):
-    pos = mc.player.getPos()
-    mc.setBlocks(pos.x, pos.y, pos.z, 
-                 pos.x, pos.y + height, pos.z, 
-                 block.STONE.id)
-    mc.setBlock(pos.x, pos.y + height + 1, pos.z, 
-                block.GOLD_BLOCK.id)
-        </code></pre>
-      </section>
-      <section>
-        <h3>Lad os bygge tårne - igen</h3>
-        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|4-5|7-8|0">
-            # første tårn - 10 blokke
-            build_tower(10)
-            time.sleep(5)
-            # andet tårn - 15 blokke            
-            build_tower(15)
-            time.sleep(5)
-            # tredje tårn - 20 blokke            
-            build_tower(20)
-          </code></pre>
-      </section>
-      <section>
-        <h3>Organiser din kode</h3>
-        <h6>tower_builder.py</h6>
-        <pre><code class="python" data-trim data-noescape data-line-numbers="0|2|3-8|1|0">
-          import mcpi.block as block
-          def build_tower(mc, height):
-              pos = mc.player.getPos()
-              mc.setBlocks(pos.x, pos.y, pos.z, 
-                           pos.x, pos.y + height, pos.z, 
-                           block.STONE.id)
-              mc.setBlock(pos.x, pos.y + height + 1, pos.z, 
-                          block.GOLD_BLOCK.id)
-        </code></pre>
-        <h6>game.py</h6>
-        <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-3|4">
-          import tower_builder
-          import mcpi.minecraft as minecraft
-          mc = minecraft.Minecraft.create()
-          tower_builder.build_tower(mc, 10)
-        </code></pre>        
-      </section>
-      <section>
-        <h3>Første øvelse</h3>
-        <h6>Kan vi give vores tårne forskellige typer tag?</h6>
-      </section>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python pirates, slides</title>
+    <link
+      href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <style>
+      h1 {
+        margin: 0;
+      }
+      .mui-appbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100px;
+      }
+      main {
+        display: flex;
+        justify-content: center;
+        padding-top: 1rem;
+      }
+      ol {
+        font-size: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mui-appbar">
+      <h1>Python Pirates, Efterår 2020</h1>
     </div>
-  </div>
-
-  <script src="dist/reveal.js"></script>
-  <script src="plugin/notes/notes.js"></script>
-  <script src="plugin/markdown/markdown.js"></script>
-  <script src="plugin/highlight/highlight.js"></script>
-  <script>
-    // More info about initialization & config:
-    // - https://revealjs.com/initialization/
-    // - https://revealjs.com/config/
-    Reveal.initialize({
-      hash: true,
-
-      // Learn about plugins: https://revealjs.com/plugins/
-      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
-    });
-
-  </script>
-</body>
-
+    <main>
+      <div class="mui-container">
+        <ol>
+          <li><a href="dag3.html">Dag 3</a></li>
+          <li><a href="dag2.html">Dag 2</a></li>
+        </ol>
+      </div>
+    </main>
+  </body>
 </html>
