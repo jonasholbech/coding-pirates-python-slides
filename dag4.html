@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Python vs Minecraft, dag 4</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Minecraft &amp; Python, dag 4</h1>
+        </section>
+        <section>
+          <h1>Tilfældighed og betingelser</h1>
+        </section>
+        <section>
+          <p>Random</p>
+          <p>If statements</p>
+          <ol>
+            <li>Goddag</li>
+            <li>Lektier fra sidst</li>
+            <li>Hvordan starter jeg skidtet?</li>
+            <li>Hvordan kører jeg et script?</li>
+            <li>Genopfriskning af API'et</li>
+            <li>Tilfældighed</li>
+            <li>Betingelser</li>
+            <li>Individuelle øvelser</li>
+            <li>Lektier til næste gang</li>
+          </ol>
+        </section>
+        <section>
+          <h2>Lektier fra sidst</h2>
+          <p>Har alle lavet deres?</p>
+        </section>
+        <section>
+          <h2>Hvordan starter jeg skidtet?</h2>
+          <h6>Og hvordan kører jeg et script?</h6>
+          <ol style="font-size: 1.4rem">
+            <li>Start Spigot</li>
+            <li>Åbn Minecraft og vælg Multiplayer</li>
+            <li>Åbn Visual Studio Code (vscode)</li>
+            <li>Åbn code mappen fra vscode</li>
+            <li>Vælg View > Terminal i top-menuen.</li>
+            <li>Lav en ny .py fil, eller arbejd videre på en eksisterende</li>
+            <li>
+              Når du er klar, kør dit program ved at skrive python mitfilnavn.py
+            </li>
+          </ol>
+        </section>
+        <section>
+          <h3>Vores starter kode</h3>
+          <p>Det her skal vi bruge i alle projekter</p>
+          <pre><code data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
+import mcpi.minecraft as minecraft
+import mcpi.block as block
+import mcpi.entity as entity
+import time
+mc = minecraft.Minecraft.create()
+</code></pre>
+        </section>
+
+        <section>
+          <h3>Don't repeat yourself</h3>
+          <h6>Funktioner</h6>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2|3-5|6-7|0">
+def build_tower(height):
+    pos = mc.player.getPos()
+    mc.setBlocks(pos.x, pos.y, pos.z, 
+                 pos.x, pos.y + height, pos.z, 
+                 block.STONE.id)
+    mc.setBlock(pos.x, pos.y + height + 1, pos.z, 
+                block.GOLD_BLOCK.id)
+        </code></pre>
+        </section>
+        <section>
+          <h3>Lad os bygge tårne - igen</h3>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|4-5|7-8|0">
+            # første tårn - 10 blokke
+            build_tower(10)
+            time.sleep(5)
+            # andet tårn - 15 blokke            
+            build_tower(15)
+            time.sleep(5)
+            # tredje tårn - 20 blokke            
+            build_tower(20)
+          </code></pre>
+        </section>
+
+        <section>
+          <section>
+            <h1>Tilfældighed</h1>
+            <h3><code>random</code></h3>
+          </section>
+          <section>
+            <p>Vi bruger tilfældighed hele tiden i spil</p>
+            <p>Har i nogle eksempler?</p>
+          </section>
+          <section>
+            <p>I Python foregår det således</p>
+            <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|4-6|8">
+              # Vi henter pythons random modul ind
+              import random
+
+              # Vi laver en variabel (myNumber) der 
+              # indeholder et tal fra 1 0g 10
+              myNumber = random.randint(1, 10)
+
+              # og så kan vi gøre hvad vi vil!
+            </code></pre>
+          </section>
+          <section>
+            <p>Lad os prøve det</p>
+            <p>Og samtidigt repetere funktioner</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Betingelser</h1>
+            <h3><code>if - elif - else</code></h3>
+          </section>
+          <section>
+            <p>Kode er stort set altid bygget op af betingelser</p>
+            <p>Hvis X sker, så gør Y</p>
+            <p>Har i eksempler?</p>
+          </section>
+          <section>
+            <p>I Python ser det således ud</p>
+            <pre><code class="python">
+              age = 10
+              if age > 17:
+                print("Du må køre bil")
+              elif age > 6:
+                print("Du går nok i skole")
+              else:
+                print("Børnehave?")
+
+            </code></pre>
+            <p class="fragment">
+              De tre betingelser er afhængige af hinanden, de bliver tjekket en
+              af gangen. Og når først en er sand (<code>True</code>), gider
+              Python ikke tjekke resten
+            </p>
+          </section>
+          <section>
+            <h3>Lad os prøve det</h3>
+          </section>
+          <section>
+            <h3>Vores skelet</h3>
+            <pre><code class="python">
+def buildBlock(w, h, d, type, hollow=False):
+    pos = mc.player.getPos()
+    mc.setBlocks(pos.x, pos.y, pos.z, pos.x+w, pos.y+h, pos.z+d, type)
+    
+buildBlock(5, 5, 5, block.STONE.id)
+            </code></pre>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
