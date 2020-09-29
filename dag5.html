@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Python vs Minecraft, dag 5</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Minecraft &amp; Python, dag 5</h1>
+        </section>
+        <section>
+          <h1>Dagens tema: Begivenheder</h1>
+        </section>
+        <section>
+          <ol>
+            <li>Goddag</li>
+            <li>Lektier fra sidst</li>
+            <li>En lille demonstration</li>
+            <li>Begivenheder</li>
+            <li>Individuelle øvelser</li>
+            <li>Lektier til næste gang</li>
+          </ol>
+        </section>
+        <section>
+          <h2>Lektier fra sidst</h2>
+          <p>Har alle lavet deres?</p>
+        </section>
+        <section>
+          <h2>En lille demo</h2>
+          <img data-src="gfx/snake-demo.png" alt="" />
+        </section>
+        <section>
+          <section>
+            <h1>Begivenheder</h1>
+          </section>
+          <section>
+            <p>Begivenheder er ting der sker i et spil, som vi kan reagere på</p>
+            <p>Har I nogle eksempler?</p>
+          </section>
+          <section>
+            <h2>Chat begivenheder</h2>
+            <p>Minecraft gør det muligt at reagere på chat-beskeder:</p>
+            <h3><code>mc.events.pollChatPosts()</code></h3>
+            <p>Det er bare lidt besværligt ...</p>
+          </section>
+          <section>
+            <h3>... så vi har gjort det nemmere</h2>
+            <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-3|5-6|8-9|0">
+              # Vi forbinder til minecraft
+              import mcpi.minecraft as minecraft
+              mc = minecraft.Minecraft.create()
+              
+              # vi henter vores eget chat-modul ind i koden
+              from chat_handler import get_latest_message
+
+              # Vi kan nu reagere på chat-beskeder!
+              chat = get_latest_message(mc)
+            </code></pre>
+          </section>
+          <section>
+            <h2>Game loop</h2>
+            <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|3|4-5|6|0">
+              running = True
+              while running:
+                  chat = get_latest_message(mc)
+                  if chat == "exit":
+                      running = False                  
+                  time.sleep(0.2)
+            </code></pre>
+          </section>
+          <section>
+            <p>Lad os prøve det</p>
+            <p><a href="https://github.com/andreasschmidtjensen/programmering-med-minecraft" target="_blank">Kode-skelet →</a></p>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
