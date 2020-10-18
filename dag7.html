@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Python vs Minecraft, dag 7</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Minecraft &amp; Python, dag 7</h1>
+        </section>
+        <section>
+          <h1>Dagens tema: Udfordring!</h1>
+        </section>
+        <section>
+          <ol>
+            <li>Goddag</li>
+            <li>Lektier fra sidst</li>
+            <li>Genopfriskning af lister</li>
+            <li>Udfordring</li>
+            <li>Lektier til næste gang</li>
+          </ol>
+        </section>
+        <section>
+          <h2>Lektier fra sidst</h2>
+          <p>Har alle lavet deres?</p>
+        </section>
+        <section>
+          <section>
+            <h1>Lister</h1>
+          </section>
+          <section>
+            <p>
+              Lister (arrays) er til når vi har en række ting der skal behandles
+              ens
+            </p>
+            <p>Eller når vi ikke ved hvor mange vi har</p>
+            <p>Har I nogle eksempler?</p>
+          </section>
+          <section>
+            <h2>Generelt om lister</h2>
+            <pre><code class="python" data-trim data-noescape>
+# lav en liste
+names = ["Daniel", "Gustav", "William", "Bastian"]
+            </code></pre>
+            <p>Snup den første</p>
+            <pre><code class="python" data-trim data-noescape>first = names[0]</code></pre>
+            <p>Hvor mange har vi?</p>
+            <pre><code class="python" data-trim data-noescape>num = len(names)
+print(num)
+            </code></pre>
+          </section>
+          <section>
+            <p>Tilføj noget til en eksisterende liste</p>
+            <pre><code class="python" data-trim data-noescape>names.append("Jonas")</code></pre>
+            <p>Find ud af om noget er i listen</p>
+            <pre><code class="python"  data-trim data-noescape  data-line-numbers="1|3|5-8|0">
+                  favCandy = ["Vingummi", "Lakrids", "Bolcher"]
+                  
+                  whatIHave = "Chocolate"
+
+                  if whatIHave in favCandy:# vi kan også bruge `not in`
+                    print("Hurra")
+                  else: 
+                    print("Øv")
+              </code></pre>
+          </section>
+          <section>
+            <p>Gør noget med hver</p>
+            <pre><code class="python" data-trim>
+                names = ["Daniel", "Gustav", "William", "Bastian"]
+                # names er vores liste
+                # oneName er et navn af gangen
+                for oneName in names:
+                    print(oneName)
+              </code></pre>
+          </section>
+          <section>
+            <p>Vælg noget tilfældigt</p>
+            <pre><code class="python" data-trim>
+                import random
+                names = ["Jonas", "Andreas", "Coding Pirates"]
+
+                def pickOne():
+                    randNumber = random.randint(0, len(names)-1)
+                    print(names[randNumber])
+
+                pickOne()
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Udfordring!</h1>
+            <h3>Det er tid til at vise hvad I har lært</h3>
+          </section>
+          <section>
+            <h3>... og det er ikke så lidt</h3>
+            <ul>
+              <li>Brug af API'et: <code>setPos, setBlocks</code></li>
+              <li>Funktioner: <code>def</code></li>
+              <li>Tilfældighed: <code>import random</code></li>
+              <li>Betingelser: <code>if, elif, else</code></li>
+              <li>Begivenheder: <code>get_latest_message()</code></li>
+              <li>Lister: <code>[1, 2, 3]</code></li>
+            </ul>
+          </section>
+          <section>
+            <h3>Opgave 1</h3>
+          
+            <div>
+              Byg funktionen <code>placer_guld()</code>, som kan placere guld hele vejen rundt om spilleren.
+            </div>
+
+            <p class="fragment" style="color: #1b91ff">
+              <small><b>Hint:</b><br/> <code>def placer_guld()</code></small>
+            </p>
+          </section>
+          <section>
+            <h3>Opgave 2</h3>
+          
+            <div>
+              Udbyg funktionen til at tage et parameter <code>blockType</code>, så man kan vælge hvilken blok der skal placeres rundt om spilleren.
+            </div>
+
+            <p class="fragment" style="color: #1b91ff">
+              <small><b>Hint:</b><br/> <code>def placer_guld(blockType)</code></small>
+            </p>
+          </section>
+          <section>
+            <h3>Opgave 3</h3>
+
+            <div>
+              Byg et game loop så man kan skrive "placer guld" i chatten, og så køres funktionen.
+            </div>
+
+            <p class="fragment" style="color: #1b91ff">
+              <small><b>Hint 1:</b><br/> <code>chat = get_latest_message(mc)</code></small>
+            </p>
+            <p class="fragment" style="color: #1b91ff">
+              <small><b>Hint 2:</b><br/> <code>if chat == "placer guld"</code></small>
+            </p>
+          </section>
+          <section>
+            <h4>Opgave 4</h4>
+            
+            <div>
+              Udvid jeres game loop, så man kan skrive "placer blokke" i chatten, og så køres funktionen med en tilfældig blok fra en liste af udvalgte blokke.
+            </div>
+
+            <p class="fragment" style="color: #1b91ff">
+              <small><b>Hint 1:</b><br/> <code>blocks = [block.STONE.id, block.GOLD.id, block.LAVA.id]</code></small>
+            </p>
+            <p class="fragment" style="color: #1b91ff">
+              <small><b>Hint 2:</b><br/> <code>randNumber = random.randint(0, len(blocks)-1)</code></small>
+            </p>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
