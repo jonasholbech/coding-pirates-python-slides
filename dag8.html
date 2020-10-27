@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Python vs Minecraft, dag 8</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Minecraft &amp; Python, dag 8</h1>
+        </section>
+        <section>
+          <h1>Dagens tema: Løkker</h1>
+        </section>
+        <section>
+          <ol>
+            <li>Goddag</li>
+            <li>Lektier fra sidst</li>
+            <li>Løkker</li>
+            <li>Udfordring</li>
+            <li>Lektier til næste gang</li>
+          </ol>
+        </section>
+        <section>
+          <h2>Lektier fra sidst</h2>
+          <p>Har alle lavet deres?</p>
+        </section>
+        <section>
+          <section>
+            <h1>Løkker</h1>
+          </section>
+          <section>
+            <p>
+              Vi bruger løkker (loops) til at køre det samme kode flere gange
+            </p>
+            <p>Har I nogle eksempler?</p>
+          </section>
+          <section>
+            <p>Vi har faktisk allerede set det før</p>
+            <pre><code class="python" data-trim>
+                names = ["Daniel", "Gustav", "William", "Bastian"]
+                # names er vores liste
+                # oneName er et navn af gangen
+                for oneName in names:
+                    print(oneName)
+              </code></pre>
+          </section>
+          <section>
+            <p>Gentag 10 gange</p>
+            <pre><code class="python" data-trim>
+                for i in range(0, 10):
+                  print(i + 1)
+              </code></pre>
+          </section>
+          <section>
+            <h3>Lad os bygge en pyramide</h3>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Udfordring!</h1>
+            <h3>Vi fortsætter med udfordringen fra <a href="dag7.html#/5" target="_blank">sidste uge</a></h3>
+          </section>
+          <section>
+            <h3>Ekstra-opgave</h3>
+          
+            <div>
+              Gør det muligt at skrive i chatten hvilken blok der skal placeres &mdash; i stedet for "placer blok" skal man skrive f.eks. "placer guld", "placer sten" eller "placer lava"
+            </div>
+
+            <p class="fragment" style="color: #1b91ff">
+              <small><b>Hint 1:</b><br/> <code>if message.startswith("placer "):</code></small>
+            </p>
+            <p class="fragment" style="color: #1b91ff">
+              <small><b>Hint 2:</b><br/> <code>split = message.split(" ")</code> <br/>(split er nu en liste)</small>
+            </p>
+            <p class="fragment" style="color: #1b91ff">
+              <small><b>Hint 3:</b><br/> <code>if split[1] == "lava":</code></small>
+            </p>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
