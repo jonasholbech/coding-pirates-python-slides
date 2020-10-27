@@ -34,7 +34,6 @@
           <ol>
             <li>Goddag</li>
             <li>Lektier fra sidst</li>
-            <li>Genopfriskning af lister</li>
             <li>Udfordring</li>
             <li>Lektier til næste gang</li>
           </ol>
@@ -42,70 +41,6 @@
         <section>
           <h2>Lektier fra sidst</h2>
           <p>Har alle lavet deres?</p>
-        </section>
-        <section>
-          <section>
-            <h1>Lister</h1>
-          </section>
-          <section>
-            <p>
-              Lister (arrays) er til når vi har en række ting der skal behandles
-              ens
-            </p>
-            <p>Eller når vi ikke ved hvor mange vi har</p>
-            <p>Har I nogle eksempler?</p>
-          </section>
-          <section>
-            <h2>Generelt om lister</h2>
-            <pre><code class="python" data-trim data-noescape>
-# lav en liste
-names = ["Daniel", "Gustav", "William", "Bastian"]
-            </code></pre>
-            <p>Snup den første</p>
-            <pre><code class="python" data-trim data-noescape>first = names[0]</code></pre>
-            <p>Hvor mange har vi?</p>
-            <pre><code class="python" data-trim data-noescape>num = len(names)
-print(num)
-            </code></pre>
-          </section>
-          <section>
-            <p>Tilføj noget til en eksisterende liste</p>
-            <pre><code class="python" data-trim data-noescape>names.append("Jonas")</code></pre>
-            <p>Find ud af om noget er i listen</p>
-            <pre><code class="python"  data-trim data-noescape  data-line-numbers="1|3|5-8|0">
-                  favCandy = ["Vingummi", "Lakrids", "Bolcher"]
-                  
-                  whatIHave = "Chocolate"
-
-                  if whatIHave in favCandy:# vi kan også bruge `not in`
-                    print("Hurra")
-                  else: 
-                    print("Øv")
-              </code></pre>
-          </section>
-          <section>
-            <p>Gør noget med hver</p>
-            <pre><code class="python" data-trim>
-                names = ["Daniel", "Gustav", "William", "Bastian"]
-                # names er vores liste
-                # oneName er et navn af gangen
-                for oneName in names:
-                    print(oneName)
-              </code></pre>
-          </section>
-          <section>
-            <p>Vælg noget tilfældigt</p>
-            <pre><code class="python" data-trim>
-                import random
-                names = ["Jonas", "Andreas", "Coding Pirates"]
-
-                def pickOne():
-                    randNumber = random.randint(0, len(names)-1)
-                    print(names[randNumber])
-
-                pickOne()
-              </code></pre>
-          </section>
         </section>
         <section>
           <section>
