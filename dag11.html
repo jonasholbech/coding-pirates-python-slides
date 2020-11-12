@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Python vs Minecraft, dag 11</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Minecraft &amp; Python, dag 11</h1>
+        </section>
+        <section>
+          <h1>Dagens tema: Entiteter</h1>
+        </section>
+        <section>
+          <ol>
+            <li>Goddag</li>
+            <li>Entiteter</li>
+            <li>Udfordring</li>
+            <li>Afslutning</li>
+          </ol>
+        </section>
+        <section>
+          <section>
+            <h1>Entiteter</h1>
+          </section>
+          <section>
+            <p>
+              Entiteter er objekter der kan bevæge sig rundt.
+            </p>
+            <p><b>Eksempler:</b> Spillere, køer, både</p>
+          </section>
+          <section>
+            <pre><code class="python" data-trim data-line-numbers>
+              import mcpi.minecraft as minecraft
+              import mcpi.entity as entity
+
+              mc.spawnEntity(x, y, z, entity.COW.id)
+            </code></pre>
+          </section>
+          <section>
+            <p style="font-style: italic;">
+              "Der skal falde køer i hovedet på mig når jeg går rundt."
+            </p>
+            <h3>Hvordan gør vi dette?</h3>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Udfordring!</h1>
+            <h3>Avancerede skulpturer</h3>
+          </section>
+          <section>
+            <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-3|5-6|0">
+# Vi forbinder til minecraft
+import mcpi.minecraft as minecraft
+mc = minecraft.Minecraft.create()
+
+# vi henter vores skulpturbygger ind i koden
+from statue_builder import build_2d_statue, build_3d_statue
+            </code></pre>
+          </section>
+          <section>
+            <pre><code class="python" data-trim data-noescape data-line-numbers="0|19|0">
+sword = """
+111             
+1111            
+11111           
+ 11111          
+  11111         
+   11111        
+    11111   33  
+     11111 333  
+      1111333   
+       111333   
+        3333    
+       333322   
+      3333 222  
+      33    2222
+             222
+             222
+"""
+build_2d_statue(mc, sword)
+            </code></pre>
+          </section>
+          <section>
+            <pre><code class="python" data-trim data-noescape data-line-numbers>
+
+tree = """
+   #####
+  #######
+ ###X#####
+#######X###
+ ####X####
+  #######
+    222
+    222
+"""
+
+build_3d_statue(mc, tree)
+            </code></pre>
+          </section>
+          <section>
+            <h3>Den allersidste udfordring:</h3>
+            <h1>Pynt et juletræ</h1>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Tak for denne gang!</h1>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
