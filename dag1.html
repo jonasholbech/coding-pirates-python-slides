@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Python vs Minecraft, dag 1</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Minecraft &amp; Python, dag 1</h1>
+        </section>
+        <section>
+          <ol>
+            <li>Goddag</li>
+            <li>Installering</li>
+            <li>hvordan starter jeg skidtet</li>
+            <li>hvordan kører jeg et script</li>
+            <li>introduktion til API’et</li>
+            <li>live eksempel</li>
+            <li>individuelle øvelser</li>
+            <li>lektier</li>
+          </ol>
+        </section>
+        <section>
+          <h2>Installering</h2>
+          <p>Vi starter dagen i dag med at installere en masse ting</p>
+          <p>Næste gang giver vi den gas</p>
+        </section>
+        <section>
+          <h2>Hvordan starter jeg skidtet?</h2>
+          <h6>Og hvordan kører jeg et script?</h6>
+          <ol style="font-size: 1.4rem">
+            <li>Start Spigot</li>
+            <li>Åbn Minecraft og vælg Multiplayer</li>
+            <li>Åbn Visual Studio Code (vscode)</li>
+            <li>Åbn code mappen fra vscode</li>
+            <li>Vælg View > Terminal i top-menuen.</li>
+            <li>Lav en ny .py fil, eller arbejd videre på en eksisterende</li>
+            <li>
+              Når du er klar, kør dit program ved at skrive python mitfilnavn.py
+            </li>
+          </ol>
+        </section>
+        <section>
+          <h3>Introduktion til API'et</h3>
+          <p>
+            <a
+              href="https://www.stuffaboutcode.com/p/minecraft-api-reference.html"
+              >https://www.stuffaboutcode.com/p/minecraft-api-reference.html</a
+            >
+          </p>
+        </section>
+        <section>
+          <h3>Vores starter kode</h3>
+          <p>Det her skal vi bruge i alle projekter</p>
+          <pre><code data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
+import mcpi.minecraft as minecraft
+import mcpi.block as block
+import mcpi.entity as entity
+import time
+mc = minecraft.Minecraft.create()
+</code></pre>
+        </section>
+        <section>
+          <h3>Lad os prøve et script</h3>
+          <p>Vi har lagt 2 scripts i kan prøve</p>
+          <ol>
+            <li><code>example.py</code></li>
+            <li><code>raining_cows.py</code></li>
+          </ol>
+          <p>kør dem ved at skrive:</p>
+          <pre><code class="bash">python filnavn.py</code></pre>
+          <p>i terminalen</p>
+        </section>
+        <section>
+          <h3>Koordinatsystemet</h3>
+          <img data-src="gfx/coordinate-system.png" alt="" />
+          <p>Men hvor spawner spilleren?</p>
+        </section>
+        <section>
+          <h3>Første script, teleportering</h3>
+          <pre><code data-trim data-noescape data-line-numbers="7">
+            import mcpi.minecraft as minecraft
+            import mcpi.block as block
+            import mcpi.entity as entity
+            import time
+            mc = minecraft.Minecraft.create()
+            
+            mc.player.setTilePos(0,0,0)
+          </code></pre>
+        </section>
+        <section>
+          <h3>Placer en entity</h3>
+          <pre><code data-trim data-noescape data-line-numbers="8-9">
+            import mcpi.minecraft as minecraft
+            import mcpi.block as block
+            import mcpi.entity as entity
+            import time
+            mc = minecraft.Minecraft.create()
+            
+            mc.player.setTilePos(0,0,0)
+            mc.spawnEntity(0, 2, 0, entity.CHICKEN.id)
+            mc.spawnEntity(0, 3, 0, entity.CHICKEN.id)
+          </code></pre>
+        </section>
+        <section>
+          <h3>Et par brugbare metoder</h3>
+          <pre><code data-trim data-noescape data-line-numbers="1-2|4-5|7-8">
+//skriv en besked i chatten
+mc.postToChat("Hej Verden")
+
+//Sæt en træ-blok
+mc.setBlock(x, y, z, block.WOOD.id)
+
+//lav en firkant af blokke
+mc.setBlocks(x1, y1, z1, x2, y2, z2, block.WOOD.id)
+     </code></pre>
+        </section>
+        <section>
+          <h3>Eksempler på blok-navne</h3>
+          <table style="font-size: 1.4rem">
+            <tr>
+              <td>AIR</td>
+              <td>STONE</td>
+              <td>GRASS</td>
+            </tr>
+            <tr>
+              <td>DIRT</td>
+              <td>COBBLESTONE</td>
+              <td>WOOD_PLANKS</td>
+            </tr>
+            <tr>
+              <td>SAPLING</td>
+              <td>BEDROCK</td>
+              <td>WATER</td>
+            </tr>
+            <tr>
+              <td>LAVA</td>
+              <td>SAND</td>
+              <td>GRAVEL</td>
+            </tr>
+            <tr>
+              <td>GOLD_ORE</td>
+              <td>IRON_ORE</td>
+              <td>COAL_ORE</td>
+            </tr>
+            <tr>
+              <td>WOOD</td>
+              <td>LEAVES</td>
+              <td>GLASS</td>
+            </tr>
+            <tr>
+              <td>SANDSTONE</td>
+              <td>BED</td>
+              <td>RAIL_POWERED</td>
+            </tr>
+            <tr>
+              <td>RAIL_DETECTOR</td>
+              <td>COBWEB</td>
+              <td>GRASS_TALL</td>
+            </tr>
+            <tr>
+              <td>DEAD_BUSH</td>
+              <td>WOOL</td>
+              <td>FLOWER_YELLOW</td>
+            </tr>
+            <tr>
+              <td>FLOWER_CYAN</td>
+              <td>MUSHROOM_BROWN</td>
+              <td>MUSHROOM_RED</td>
+            </tr>
+            <tr>
+              <td>GOLD_BLOCK</td>
+              <td>IRON_BLOCK</td>
+              <td>STONE_SLAB_DOUBL</td>
+            </tr>
+            <tr>
+              <td>STONE_SLAB</td>
+              <td>TNT</td>
+              <td>FIRE</td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h1>Lektier</h1>
+        </section>
+        <!-- <section>
+          <h3>Hvor er spilleren?</h3>
+          <pre><code class="python" data-trim data-noescape>
+#lav en variabel (pos)
+#der indeholder spillerens koordinater
+pos = mc.player.getPos()
+
+#Nu har vi pos.x, pos.y og pos.z
+        </code></pre>
+        </section>
+
+        <section>
+          <h3>Gør noget mange gange</h3>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
+while True:
+    pos = mc.player.getPos()
+    mc.setBlock(pos.x, pos.y, pos.z, block.TNT.id)
+    time.sleep(0.1)
+        </code></pre>
+          <p>Du kan stoppe scriptet ved at trykke ctrl og c i terminalen</p>
+        </section>-->
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
