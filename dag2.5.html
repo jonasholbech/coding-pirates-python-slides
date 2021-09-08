@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>Python vs Minecraft, dag 1</title>
+    <title>Python vs Minecraft, dag 2</title>
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
@@ -30,6 +30,7 @@
         <section>
           <ol>
             <li>Goddag</li>
+            <li>lektier fra sidst</li>
             <li>hvordan starter jeg skidtet</li>
             <li>hvordan kører jeg et script</li>
             <li>introduktion til API’et</li>
@@ -37,6 +38,10 @@
             <li>individuelle øvelser</li>
             <li>lektier</li>
           </ol>
+        </section>
+        <section>
+          <h2>Lektier fra sidst?</h2>
+          <p>Har alle lavet deres?</p>
         </section>
         <section>
           <h2>Hvordan starter jeg skidtet?</h2>
@@ -72,37 +77,6 @@ import mcpi.entity as entity
 import time
 mc = minecraft.Minecraft.create()
 </code></pre>
-        </section>
-        <section>
-          <h3>Koordinatsystemet</h3>
-          <img data-src="gfx/coordinate-system.png" alt="" />
-          <p>Men hvor spawner spilleren?</p>
-        </section>
-        <section>
-          <h3>Første script, teleportering</h3>
-          <pre><code data-trim data-noescape data-line-numbers="7">
-            import mcpi.minecraft as minecraft
-            import mcpi.block as block
-            import mcpi.entity as entity
-            import time
-            mc = minecraft.Minecraft.create()
-            
-            mc.player.setTilePos(0,0,0)
-          </code></pre>
-        </section>
-        <section>
-          <h3>Placer en entity</h3>
-          <pre><code data-trim data-noescape data-line-numbers="8-9">
-            import mcpi.minecraft as minecraft
-            import mcpi.block as block
-            import mcpi.entity as entity
-            import time
-            mc = minecraft.Minecraft.create()
-            
-            mc.player.setTilePos(0,0,0)
-            mc.spawnEntity(0, 2, 0, entity.CHICKEN.id)
-            mc.spawnEntity(0, 3, 0, entity.CHICKEN.id)
-          </code></pre>
         </section>
         <section>
           <h3>Et par brugbare metoder</h3>
@@ -183,42 +157,6 @@ mc.setBlocks(x1, y1, z1, x2, y2, z2, block.WOOD.id)
           </table>
         </section>
         <section>
-          <h1>Øvelse</h1>
-        </section>
-        <section>
-          <p>Skriv et program der gør følgende</p>
-          <ol>
-            <li>Teleporter spilleren til 0,0,0</li>
-            <li>
-              Sætter fire blokke af dynamit:
-              <ul>
-                <li>Foran spilleren</li>
-                <li>Bagved spilleren</li>
-                <li>På den ene side af spilleren</li>
-                <li>På den anden side af spilleren</li>
-              </ul>
-            </li>
-          </ol>
-          <p>Set oppe fra vil det se således ud</p>
-          <pre>
- D 
-DSD
- D </pre
-          >
-        </section>
-        <section>
-          <h1>Lektier</h1>
-        </section>
-        <section>
-          <p>Tegn følgende på ternet papir (2-dimensionelt)</p>
-          <ol>
-            <li>Et sværd</li>
-            <li>En økse</li>
-            <li>En Skovl</li>
-          </ol>
-          <p>Hvis du har mod på det, kan du prøve at kode det bagefter</p>
-        </section>
-        <!-- <section>
           <h3>Hvor er spilleren?</h3>
           <pre><code class="python" data-trim data-noescape>
 #lav en variabel (pos)
@@ -228,7 +166,9 @@ pos = mc.player.getPos()
 #Nu har vi pos.x, pos.y og pos.z
         </code></pre>
         </section>
-
+        <section>
+          <img data-src="gfx/coordinate-system.png" alt="" />
+        </section>
         <section>
           <h3>Gør noget mange gange</h3>
           <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
@@ -238,7 +178,7 @@ while True:
     time.sleep(0.1)
         </code></pre>
           <p>Du kan stoppe scriptet ved at trykke ctrl og c i terminalen</p>
-        </section>-->
+        </section>
       </div>
     </div>
 
