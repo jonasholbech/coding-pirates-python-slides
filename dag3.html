@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>Python vs Minecraft, dag 2</title>
+    <title>Python vs Minecraft, dag 3</title>
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
@@ -30,17 +30,17 @@
         <section>
           <ol>
             <li>Goddag</li>
-            <li>Lektier fra sidst</li>
-            <li>Hvordan starter jeg skidtet?</li>
-            <li>Hvordan kører jeg et script?</li>
-            <li>Genopfriskning af API'et</li>
-            <li>Hvordan gør man den samme ting flere gange?</li>
-            <li>Individuelle øvelser</li>
-            <li>Lektier til næste gang</li>
+            <li>lektier fra sidst</li>
+            <li>hvordan starter jeg skidtet</li>
+            <li>hvordan kører jeg et script</li>
+            <li>introduktion til API’et</li>
+            <li>live eksempel</li>
+            <li>individuelle øvelser</li>
+            <li>lektier</li>
           </ol>
         </section>
         <section>
-          <h2>Lektier fra sidst</h2>
+          <h2>Lektier fra sidst?</h2>
           <p>Har alle lavet deres?</p>
         </section>
         <section>
@@ -70,182 +70,77 @@ mc = minecraft.Minecraft.create()
 </code></pre>
         </section>
         <section>
-          <h3>Genopfriskning af API'et</h3>
-          <p>
-            <a
-              target="_blank"
-              href="https://www.stuffaboutcode.com/p/minecraft-api-reference.html"
-              >https://www.stuffaboutcode.com/p/minecraft-api-reference.html</a
-            >
+          <h3>Hvad vi kan nu</h3>
+          <pre><code data-trim data-noescape data-line-numbers="1-2|4-5|7-8|10-11">
+            //teleporter spilleren til 0,0,0
+            mc.player.setTilePos(0,0,0)
+
+            //skriv en besked i chatten
+            mc.postToChat("Hej Verden")
+            
+            //Sæt en træ-blok
+            mc.setBlock(x, y, z, block.WOOD.id)
+
+            //spawn en "entity"
+            mc.spawnEntity(0, 2, 0, entity.CHICKEN.id)
+          </code></pre>
+          <p class="fragment">
+            Lad os prøve at kigge i <code>mcpi</code> mappen
           </p>
-          <h6>Hvad er det nu man kan gøre?</h6>
-          <ul style="font-size: 1.4rem" data-line-numbers="1|2|3">
-            <li class="fragment highlight-current-blue">
-              <code>mc.player.getPos()</code>
-            </li>
-            <li class="fragment highlight-current-blue">
-              <code>mc.player.setPos(x, y, z)</code>
-            </li>
-            <li class="fragment highlight-current-blue">
-              <code>mc.setBlock(x, y, z, block.LAVA.id)</code>
-            </li>
-          </ul>
+        </section>
+        <section>
+          <h3>Hvor er spilleren?</h3>
+          <pre><code class="python" data-trim data-noescape>
+#lav en variabel (pos)
+#der indeholder spillerens koordinater
+pos = mc.player.getPos()
+
+#Nu har vi pos.x, pos.y og pos.z
+        </code></pre>
         </section>
         <section>
           <img data-src="gfx/coordinate-system.png" alt="" />
         </section>
         <section>
-          <h3>Eksempler på blok-navne</h3>
-          <table style="font-size: 1.4rem">
-            <tr>
-              <td>AIR</td>
-              <td>STONE</td>
-              <td>GRASS</td>
-            </tr>
-            <tr>
-              <td>DIRT</td>
-              <td>COBBLESTONE</td>
-              <td>WOOD_PLANKS</td>
-            </tr>
-            <tr>
-              <td>SAPLING</td>
-              <td>BEDROCK</td>
-              <td>WATER</td>
-            </tr>
-            <tr>
-              <td>LAVA</td>
-              <td>SAND</td>
-              <td>GRAVEL</td>
-            </tr>
-            <tr>
-              <td>GOLD_ORE</td>
-              <td>IRON_ORE</td>
-              <td>COAL_ORE</td>
-            </tr>
-            <tr>
-              <td>WOOD</td>
-              <td>LEAVES</td>
-              <td>GLASS</td>
-            </tr>
-            <tr>
-              <td>SANDSTONE</td>
-              <td>BED</td>
-              <td>RAIL_POWERED</td>
-            </tr>
-            <tr>
-              <td>RAIL_DETECTOR</td>
-              <td>COBWEB</td>
-              <td>GRASS_TALL</td>
-            </tr>
-            <tr>
-              <td>DEAD_BUSH</td>
-              <td>WOOL</td>
-              <td>FLOWER_YELLOW</td>
-            </tr>
-            <tr>
-              <td>FLOWER_CYAN</td>
-              <td>MUSHROOM_BROWN</td>
-              <td>MUSHROOM_RED</td>
-            </tr>
-            <tr>
-              <td>GOLD_BLOCK</td>
-              <td>IRON_BLOCK</td>
-              <td>STONE_SLAB_DOUBL</td>
-            </tr>
-            <tr>
-              <td>STONE_SLAB</td>
-              <td>TNT</td>
-              <td>FIRE</td>
-            </tr>
-          </table>
-        </section>
-        <section>
-          <h3>Lad os bygge tårne</h3>
-          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|3-5|6|7-11">
-          # første tårn - 10 blokke
-          pos = mc.player.getPos()
-          mc.setBlocks(pos.x, pos.y, pos.z, 
-                        pos.x, pos.y + 10, pos.z, block.STONE.id)
-          mc.setBlock(pos.x, pos.y + 11, pos.z, block.GOLD_BLOCK.id)
-          time.sleep(5)
-          # andet tårn - 15 blokke
-          pos = mc.player.getPos()
-          mc.setBlocks(pos.x, pos.y, pos.z, 
-                        pos.x, pos.y + 15, pos.z, block.STONE.id)
-          mc.setBlock(pos.x, pos.y + 16, pos.z, block.GOLD_BLOCK.id)
-          ...
-        </code></pre>
-        </section>
-        <section data-transition="none">
-          <h3>Lad os bygge tårne</h3>
-          <pre><code class="python" data-trim data-noescape data-line-numbers="7|8-12|0">
-          ...
-          # andet tårn - 15 blokke
-          pos = mc.player.getPos()
-          mc.setBlocks(pos.x, pos.y, pos.z, 
-                        pos.x, pos.y + 15, pos.z, block.STONE.id)
-          mc.setBlock(pos.x, pos.y + 16, pos.z, block.GOLD_BLOCK.id)
-          time.sleep(5)
-          # tredje tårn - 20 blokke
-          pos = mc.player.getPos()
-          mc.setBlocks(pos.x, pos.y, pos.z, 
-                        pos.x, pos.y + 20, pos.z, block.STONE.id)
-          mc.setBlock(pos.x, pos.y + 21, pos.z, block.GOLD_BLOCK.id)
-        </code></pre>
-        </section>
-        <section>
-          <h3>Kan vi gøre noget smartere?</h3>
-        </section>
-        <section>
-          <h3>Don't repeat yourself</h3>
-          <h6>Funktioner</h6>
-          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2|3-5|6-7|0">
-def build_tower(height):
-    pos = mc.player.getPos()
-    mc.setBlocks(pos.x, pos.y, pos.z, 
-                 pos.x, pos.y + height, pos.z, 
-                 block.STONE.id)
-    mc.setBlock(pos.x, pos.y + height + 1, pos.z, 
-                block.GOLD_BLOCK.id)
-        </code></pre>
-        </section>
-        <section>
-          <h3>Lad os bygge tårne - igen</h3>
-          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|4-5|7-8|0">
-            # første tårn - 10 blokke
-            build_tower(10)
-            time.sleep(5)
-            # andet tårn - 15 blokke            
-            build_tower(15)
-            time.sleep(5)
-            # tredje tårn - 20 blokke            
-            build_tower(20)
+          <h3>Placér ting relativt til spilleren</h3>
+          <pre><code class="python" data-trim data-noescape>
+pos = mc.player.getPos()
+
+mc.setBlock(pos.x, pos.y+2, pos.z, blocks.TNT.id)
           </code></pre>
         </section>
         <section>
-          <h3>Organiser din kode</h3>
-          <h6>tower_builder.py</h6>
-          <pre><code class="python" data-trim data-noescape data-line-numbers="0|2|3-8|1|0">
-          import mcpi.block as block
-          def build_tower(mc, height):
-              pos = mc.player.getPos()
-              mc.setBlocks(pos.x, pos.y, pos.z, 
-                           pos.x, pos.y + height, pos.z, 
-                           block.STONE.id)
-              mc.setBlock(pos.x, pos.y + height + 1, pos.z, 
-                          block.GOLD_BLOCK.id)
-        </code></pre>
-          <h6>game.py</h6>
-          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-3|4">
-          import tower_builder
-          import mcpi.minecraft as minecraft
-          mc = minecraft.Minecraft.create()
-          tower_builder.build_tower(mc, 10)
-        </code></pre>
+          <h1>Øvelse</h1>
         </section>
         <section>
-          <h3>Første øvelse</h3>
-          <h6>Kan vi give vores tårne forskellige typer tag?</h6>
+          <ol>
+            <li>lav et nyt script (kald det <code>hakke.py</code>)</li>
+            <li>copy/paste starter-koden ind</li>
+            <li>Gem spillerens position</li>
+            <li>
+              Skriv kode der tegner den hakke du har tegnet på ternet papir
+            </li>
+          </ol>
+          <h3>Hints</h3>
+          <div class="fragment">
+            <p>1 gang</p>
+            <pre><code data-trim data-noescape>pos = mc.player.getPos()</code></pre>
+            <p>mange gange</p>
+            <pre><code data-trim data-noescape>
+                mc.setBlock(pos.x + ?, pos.y + ?, pos.z + ?, blocks.WOOD.id)
+                </code>
+              </pre>
+          </div>
+        </section>
+        <section>
+          <h3>Gør noget mange gange</h3>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
+    while True:
+      pos = mc.player.getPos()
+      mc.setBlock(pos.x, pos.y, pos.z, block.TNT.id)
+      time.sleep(0.1)
+          </code></pre>
+          <p>Du kan stoppe scriptet ved at trykke ctrl og c i terminalen</p>
         </section>
       </div>
     </div>
