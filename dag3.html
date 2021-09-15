@@ -90,7 +90,7 @@ mc = minecraft.Minecraft.create()
         </section>
         <section>
           <h3>Hvor er spilleren?</h3>
-          <pre><code class="python" data-trim data-noescape>
+          <pre><code data-trim data-noescape>
 #lav en variabel (pos)
 #der indeholder spillerens koordinater
 pos = mc.player.getPos()
@@ -103,7 +103,7 @@ pos = mc.player.getPos()
         </section>
         <section>
           <h3>Placér ting relativt til spilleren</h3>
-          <pre><code class="python" data-trim data-noescape>
+          <pre><code data-trim data-noescape>
 pos = mc.player.getPos()
 
 mc.setBlock(pos.x, pos.y+2, pos.z, block.TNT.id)
@@ -142,7 +142,7 @@ mc.setBlocks(x1, y1, z1, x2, y2, z2, block.WOOD.id)
         </section>
         <section>
           <h3>Gør noget mange gange</h3>
-          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
+          <pre><code data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
     while True:
       pos = mc.player.getPos()
       mc.setBlock(pos.x, pos.y, pos.z, block.TNT.id)
