@@ -72,16 +72,16 @@ mc = minecraft.Minecraft.create()
         <section>
           <h3>Hvad vi kan nu</h3>
           <pre><code data-trim data-noescape data-line-numbers="1-2|4-5|7-8|10-11">
-            //teleporter spilleren til 0,0,0
+            #teleporter spilleren til 0,0,0
             mc.player.setTilePos(0,0,0)
 
-            //skriv en besked i chatten
+            #skriv en besked i chatten
             mc.postToChat("Hej Verden")
             
-            //Sæt en træ-blok
+            #Sæt en træ-blok
             mc.setBlock(x, y, z, block.WOOD.id)
 
-            //spawn en "entity"
+            #spawn en "entity"
             mc.spawnEntity(0, 2, 0, entity.CHICKEN.id)
           </code></pre>
           <p class="fragment">
@@ -106,7 +106,7 @@ pos = mc.player.getPos()
           <pre><code class="python" data-trim data-noescape>
 pos = mc.player.getPos()
 
-mc.setBlock(pos.x, pos.y+2, pos.z, blocks.TNT.id)
+mc.setBlock(pos.x, pos.y+2, pos.z, block.TNT.id)
           </code></pre>
         </section>
         <section>
@@ -127,10 +127,18 @@ mc.setBlock(pos.x, pos.y+2, pos.z, blocks.TNT.id)
             <pre><code data-trim data-noescape>pos = mc.player.getPos()</code></pre>
             <p>mange gange</p>
             <pre><code data-trim data-noescape>
-                mc.setBlock(pos.x + ?, pos.y + ?, pos.z + ?, blocks.WOOD.id)
+                mc.setBlock(pos.x + ?, pos.y + ?, pos.z + ?, block.WOOD.id)
                 </code>
               </pre>
           </div>
+        </section>
+        <section>
+          <h3>Sæt mange blokke på en gang</h3>
+
+          <pre><code data-trim data-noescape data-line-numbers="1-2">
+#lav en firkant af blokke
+mc.setBlocks(x1, y1, z1, x2, y2, z2, block.WOOD.id)
+       </code></pre>
         </section>
         <section>
           <h3>Gør noget mange gange</h3>
