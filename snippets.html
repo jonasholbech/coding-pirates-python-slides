@@ -33,36 +33,6 @@ mc.setBlock(pos.x, pos.y + height + 1, pos.z,
 </section>
 <section>
   <section>
-    <h1>Betingelser</h1>
-    <h3><code>if - elif - else</code></h3>
-  </section>
-  <section>
-    <p>Kode er stort set altid bygget op af betingelser</p>
-    <p>Hvis X sker, så gør Y</p>
-    <p>Har i eksempler?</p>
-  </section>
-  <section>
-    <p>I Python ser det således ud</p>
-    <pre><code class="python">
-      age = 10
-      if age > 17:
-        print("Du må køre bil")
-      elif age > 6:
-        print("Du går nok i skole")
-      else:
-        print("Børnehave?")
-
-    </code></pre>
-    <p class="fragment">
-      De tre betingelser er afhængige af hinanden, de bliver tjekket en af
-      gangen. Og når først en er sand (<code>True</code>), gider Python ikke
-      tjekke resten
-    </p>
-  </section>
-  <section>
-    <h3>Lad os prøve det</h3>
-  </section>
-  <section>
     <h3>Vores skelet</h3>
     <pre><code class="python">
 def buildBlock(w, h, d, type, hollow=False):
