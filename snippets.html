@@ -1,10 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body></body>
-</html>
+<section>
+  <h3>Don't repeat yourself</h3>
+  <h6>Funktioner</h6>
+  <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2|3-5|6-7|0">
+def build_tower(height):
+pos = mc.player.getPos()
+mc.setBlocks(pos.x, pos.y, pos.z, 
+         pos.x, pos.y + height, pos.z, 
+         block.STONE.id)
+mc.setBlock(pos.x, pos.y + height + 1, pos.z, 
+        block.GOLD_BLOCK.id)
+</code></pre>
+</section>
+<section>
+  <h3>Lad os bygge tårne - igen</h3>
+  <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|4-5|7-8|0">
+    # første tårn - 10 blokke
+    build_tower(10)
+    time.sleep(5)
+    # andet tårn - 15 blokke            
+    build_tower(15)
+    time.sleep(5)
+    # tredje tårn - 20 blokke            
+    build_tower(20)
+  </code></pre>
+</section>
+
+<section>
+  <section>
+    <p>Lad os prøve det</p>
+    <p>Og samtidigt repetere funktioner</p>
+  </section>
+</section>
+<section>
+  <section>
+    <h1>Betingelser</h1>
+    <h3><code>if - elif - else</code></h3>
+  </section>
+  <section>
+    <p>Kode er stort set altid bygget op af betingelser</p>
+    <p>Hvis X sker, så gør Y</p>
+    <p>Har i eksempler?</p>
+  </section>
+  <section>
+    <p>I Python ser det således ud</p>
+    <pre><code class="python">
+      age = 10
+      if age > 17:
+        print("Du må køre bil")
+      elif age > 6:
+        print("Du går nok i skole")
+      else:
+        print("Børnehave?")
+
+    </code></pre>
+    <p class="fragment">
+      De tre betingelser er afhængige af hinanden, de bliver tjekket en af
+      gangen. Og når først en er sand (<code>True</code>), gider Python ikke
+      tjekke resten
+    </p>
+  </section>
+  <section>
+    <h3>Lad os prøve det</h3>
+  </section>
+  <section>
+    <h3>Vores skelet</h3>
+    <pre><code class="python">
+def buildBlock(w, h, d, type, hollow=False):
+pos = mc.player.getPos()
+mc.setBlocks(pos.x, pos.y, pos.z, pos.x+w, pos.y+h, pos.z+d, type)
+
+buildBlock(5, 5, 5, block.STONE.id)
+    </code></pre>
+  </section>
+</section>

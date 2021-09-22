@@ -28,7 +28,7 @@
           <h1>Minecraft &amp; Python, dag 4</h1>
         </section>
         <section>
-          <h1>while True</h1>
+          <h1>Tilfældighed og betingelser</h1>
         </section>
         <section>
           <p>Random</p>
@@ -39,10 +39,8 @@
             <li>Hvordan starter jeg skidtet?</li>
             <li>Hvordan kører jeg et script?</li>
             <li>Genopfriskning af API'et</li>
-            <li><code>setBlocks</code></li>
-            <li><code>while True:</code></li>
             <li>Tilfældighed</li>
-            <!--<li>Betingelser</li>-->
+            <li>Betingelser</li>
             <li>Individuelle øvelser</li>
             <li>Lektier til næste gang</li>
           </ol>
@@ -79,59 +77,100 @@ mc = minecraft.Minecraft.create()
         </section>
 
         <section>
-          <h3>Sæt mange blokke på en gang</h3>
-
-          <pre><code data-trim data-noescape data-line-numbers="1-2">
-  #lav en firkant af blokke
-  mc.setBlocks(x1, y1, z1, x2, y2, z2, block.WOOD.id)
-         </code></pre>
+          <h3>Don't repeat yourself</h3>
+          <h6>Funktioner</h6>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2|3-5|6-7|0">
+def build_tower(height):
+    pos = mc.player.getPos()
+    mc.setBlocks(pos.x, pos.y, pos.z, 
+                 pos.x, pos.y + height, pos.z, 
+                 block.STONE.id)
+    mc.setBlock(pos.x, pos.y + height + 1, pos.z, 
+                block.GOLD_BLOCK.id)
+        </code></pre>
         </section>
         <section>
-          <h3>Gør noget mange gange</h3>
-          <pre><code data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
-      while True:
-        pos = mc.player.getPos()
-        mc.setBlock(pos.x, pos.y, pos.z, block.WOOD.id)
-        time.sleep(0.1)
-            </code></pre>
-          <p>Du kan stoppe scriptet ved at trykke ctrl og c i terminalen</p>
-        </section>
-        <section>
-          <h3>Øvelse</h3>
-          <pre><code data-trim data-noescape>
-                while True:
-                  pos = mc.player.getPos()
-                  mc.setBlock(pos.x, pos.y, pos.z, block.WOOD.id)
-                  time.sleep(0.1)
-            </code></pre>
-          <ol>
-            <li>Lav en ny fil (while.py)</li>
-            <li>Skriv evenstående kode</li>
-            <li>Tilpas koden så den sætter TNT</li>
-            <li>Og ild ovenpå TNT'en</li>
-          </ol>
+          <h3>Lad os bygge tårne - igen</h3>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|4-5|7-8|0">
+            # første tårn - 10 blokke
+            build_tower(10)
+            time.sleep(5)
+            # andet tårn - 15 blokke            
+            build_tower(15)
+            time.sleep(5)
+            # tredje tårn - 20 blokke            
+            build_tower(20)
+          </code></pre>
         </section>
 
         <section>
-          <h1>Tilfældighed</h1>
-          <h3><code>random</code></h3>
-        </section>
-        <section>
-          <p>Vi bruger tilfældighed hele tiden i spil</p>
-          <p>Har i nogle eksempler?</p>
-        </section>
-        <section>
-          <p>I Python foregår det således</p>
-          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|4-6|8">
+          <section>
+            <h1>Tilfældighed</h1>
+            <h3><code>random</code></h3>
+          </section>
+          <section>
+            <p>Vi bruger tilfældighed hele tiden i spil</p>
+            <p>Har i nogle eksempler?</p>
+          </section>
+          <section>
+            <p>I Python foregår det således</p>
+            <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|4-6|8">
               # Vi henter pythons random modul ind
               import random
-        
+
               # Vi laver en variabel (myNumber) der 
               # indeholder et tal fra 1 0g 10
               myNumber = random.randint(1, 10)
-        
+
               # og så kan vi gøre hvad vi vil!
             </code></pre>
+          </section>
+          <section>
+            <p>Lad os prøve det</p>
+            <p>Og samtidigt repetere funktioner</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Betingelser</h1>
+            <h3><code>if - elif - else</code></h3>
+          </section>
+          <section>
+            <p>Kode er stort set altid bygget op af betingelser</p>
+            <p>Hvis X sker, så gør Y</p>
+            <p>Har i eksempler?</p>
+          </section>
+          <section>
+            <p>I Python ser det således ud</p>
+            <pre><code class="python">
+              age = 10
+              if age > 17:
+                print("Du må køre bil")
+              elif age > 6:
+                print("Du går nok i skole")
+              else:
+                print("Børnehave?")
+
+            </code></pre>
+            <p class="fragment">
+              De tre betingelser er afhængige af hinanden, de bliver tjekket en
+              af gangen. Og når først en er sand (<code>True</code>), gider
+              Python ikke tjekke resten
+            </p>
+          </section>
+          <section>
+            <h3>Lad os prøve det</h3>
+          </section>
+          <section>
+            <h3>Vores skelet</h3>
+            <pre><code class="python">
+def buildBlock(w, h, d, type, hollow=False):
+    pos = mc.player.getPos()
+    mc.setBlocks(pos.x, pos.y, pos.z, pos.x+w, pos.y+h, pos.z+d, type)
+    
+buildBlock(5, 5, 5, block.STONE.id)
+            </code></pre>
+          </section>
         </section>
       </div>
     </div>

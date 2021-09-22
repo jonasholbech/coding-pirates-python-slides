@@ -132,24 +132,6 @@ mc.setBlock(pos.x, pos.y+2, pos.z, block.TNT.id)
               </pre>
           </div>
         </section>
-        <section>
-          <h3>Sæt mange blokke på en gang</h3>
-
-          <pre><code data-trim data-noescape data-line-numbers="1-2">
-#lav en firkant af blokke
-mc.setBlocks(x1, y1, z1, x2, y2, z2, block.WOOD.id)
-       </code></pre>
-        </section>
-        <section>
-          <h3>Gør noget mange gange</h3>
-          <pre><code data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
-    while True:
-      pos = mc.player.getPos()
-      mc.setBlock(pos.x, pos.y, pos.z, block.TNT.id)
-      time.sleep(0.1)
-          </code></pre>
-          <p>Du kan stoppe scriptet ved at trykke ctrl og c i terminalen</p>
-        </section>
       </div>
     </div>
 
