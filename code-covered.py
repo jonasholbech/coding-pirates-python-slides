@@ -27,3 +27,15 @@ while True:
       pos = mc.player.getPos()
       mc.setBlock(pos.x, pos.y, pos.z, block.TNT.id)
       time.sleep(0.1)
+
+import random
+
+myNumber = random.randint(1, 10)
+
+age = 10
+if age > 17:
+      print("Du må køre bil")
+elif age > 6:
+      print("Du går nok i skole")
+else:
+      print("Børnehave?")

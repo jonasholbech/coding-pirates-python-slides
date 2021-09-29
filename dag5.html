@@ -28,14 +28,14 @@
           <h1>Minecraft &amp; Python, dag 5</h1>
         </section>
         <section>
-          <h1>Dagens tema: Begivenheder</h1>
+          <h1>Tilfældighed</h1>
         </section>
         <section>
           <ol>
             <li>Goddag</li>
             <li>Lektier fra sidst</li>
-            <li>En lille demonstration</li>
-            <li>Begivenheder</li>
+            <li>Tilfældighed</li>
+            <li>Betingelser</li>
             <li>Individuelle øvelser</li>
             <li>Lektier til næste gang</li>
           </ol>
@@ -45,52 +45,73 @@
           <p>Har alle lavet deres?</p>
         </section>
         <section>
-          <h2>En lille demo</h2>
-          <img data-src="gfx/snake-demo.png" alt="" />
+          <h3>Gør noget mange gange</h3>
+          <pre><code data-trim data-noescape data-line-numbers="0|1|2-3|4|5|1-5">
+      while True:
+        pos = mc.player.getPos()
+        mc.setBlock(pos.x, pos.y, pos.z, block.WOOD.id)
+        time.sleep(0.1)
+            </code></pre>
+          <p>Du kan stoppe scriptet ved at trykke ctrl og c i terminalen</p>
         </section>
         <section>
-          <section>
-            <h1>Begivenheder</h1>
-          </section>
-          <section>
-            <p>Begivenheder er ting der sker i et spil, som vi kan reagere på</p>
-            <p>Har I nogle eksempler?</p>
-          </section>
-          <section>
-            <h2>Chat begivenheder</h2>
-            <p>Minecraft gør det muligt at reagere på chat-beskeder:</p>
-            <h3><code>mc.events.pollChatPosts()</code></h3>
-            <p>Det er bare lidt besværligt ...</p>
-          </section>
-          <section>
-            <h3>... så vi har gjort det nemmere</h2>
-            <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-3|5-6|8-9|0">
-              # Vi forbinder til minecraft
-              import mcpi.minecraft as minecraft
-              mc = minecraft.Minecraft.create()
-              
-              # vi henter vores eget chat-modul ind i koden
-              from chat_handler import get_latest_message
-
-              # Vi kan nu reagere på chat-beskeder!
-              chat = get_latest_message(mc)
+          <h1>Tilfældighed</h1>
+          <h3><code>random</code></h3>
+        </section>
+        <section>
+          <p>Vi bruger tilfældighed hele tiden i spil</p>
+          <p>Har i nogle eksempler?</p>
+        </section>
+        <section>
+          <p>I Python foregår det således</p>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|4-6|8">
+              # Vi henter pythons random modul ind
+              import random
+        
+              # Vi laver en variabel (myNumber) der 
+              # indeholder et tal fra 1 til 10
+              myNumber = random.randint(1, 10)
+        
+              # og så kan vi gøre hvad vi vil!
             </code></pre>
-          </section>
-          <section>
-            <h2>Game loop</h2>
-            <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|3|4-5|6|0">
-              running = True
-              while running:
-                  chat = get_latest_message(mc)
-                  if chat == "exit":
-                      running = False                  
-                  time.sleep(0.2)
-            </code></pre>
-          </section>
-          <section>
-            <p>Lad os prøve det</p>
-            <p><a href="https://github.com/andreasschmidtjensen/programmering-med-minecraft" target="_blank">Kode-skelet →</a></p>
-          </section>
+        </section>
+        <section>
+          <h1>Betingelser</h1>
+          <h3><code>if - elif - else</code></h3>
+        </section>
+        <section>
+          <p>Kode er stort set altid bygget op af betingelser</p>
+          <p>Hvis X sker, så gør Y</p>
+          <p>Har i eksempler?</p>
+        </section>
+        <section>
+          <p>I Python ser det således ud</p>
+          <pre><code class="python">
+            age = 10
+            if age > 17:
+              print("Du må køre bil")
+            elif age > 6:
+              print("Du går nok i skole")
+            else:
+              print("Børnehave?")
+      
+          </code></pre>
+          <p class="fragment">
+            De tre betingelser er afhængige af hinanden, de bliver tjekket en af
+            gangen. Og når først en er sand (<code>True</code>), gider Python
+            ikke tjekke resten
+          </p>
+        </section>
+        <section>
+          <h3>Lad os prøve det</h3>
+        </section>
+        <section>
+          <h3>Øvelse</h3>
+          <blockquote>
+            Hvert sekund skal den sætte en tilfældig blok, et tilfældigt sted,
+            tæt på spilleren
+          </blockquote>
+          <p class="fragment">?</p>
         </section>
       </div>
     </div>
