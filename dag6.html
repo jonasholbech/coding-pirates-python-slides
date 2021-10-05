@@ -28,99 +28,38 @@
           <h1>Minecraft &amp; Python, dag 6</h1>
         </section>
         <section>
-          <h1>Dagens tema: Lister</h1>
+          <p>Dagens tema:</p>
+          <h1>Betingelser &amp; chat</h1>
         </section>
         <section>
           <ol>
             <li>Goddag</li>
             <li>Lektier fra sidst</li>
-            <li>En lille demonstration</li>
-            <li>Lister</li>
+            <li>Chat</li>
+            <li>Betingelser</li>
             <li>Individuelle øvelser</li>
             <li>Lektier til næste gang</li>
           </ol>
         </section>
+
         <section>
-          <h2>Lektier fra sidst</h2>
-          <p>Har alle lavet deres?</p>
+          <p>Først skal vi have en ny fil: <code>chat_handler.py</code></p>
+          <pre><code class="python" data-trim>
+from mcpi.minecraft import Minecraft
+
+# poll the server for the latest messages
+def get_latest_message(mc):
+    chatEvents = mc.events.pollChatPosts()
+    if len(chatEvents) > 0:
+        return chatEvents[-1].message
+    else:
+        return None
+
+          </code></pre>
         </section>
+
         <section>
-          <section>
-            <h1>Lister</h1>
-          </section>
-          <section>
-            <p>
-              Lister (arrays) er til når vi har en række ting der skal behandles
-              ens
-            </p>
-            <p>Eller når vi ikke ved hvor mange vi har</p>
-            <p>Har I nogle eksempler?</p>
-          </section>
-          <section>
-            <h2>Generelt om lister</h2>
-            <pre><code class="python" data-trim data-noescape>
-# lav en liste
-names = ["Daniel", "Gustav", "William", "Bastian"]
-            </code></pre>
-            <p>Snup den første</p>
-            <pre><code class="python" data-trim data-noescape>first = names[0]</code></pre>
-            <p>Hvor mange har vi?</p>
-            <pre><code class="python" data-trim data-noescape>num = len(names)
-print(num)
-            </code></pre>
-          </section>
-          <section>
-            <p>Tilføj noget til en eksisterende liste</p>
-            <pre><code class="python" data-trim data-noescape>names.append("Jonas")</code></pre>
-            <p>Find ud af om noget er i listen</p>
-            <pre><code class="python"  data-trim data-noescape  data-line-numbers="1|3|5-8|0">
-                  favCandy = ["Vingummi", "Lakrids", "Bolcher"]
-                  
-                  whatIHave = "Chocolate"
-
-                  if whatIHave in favCandy:# vi kan også bruge `not in`
-                    print("Hurra")
-                  else: 
-                    print("Øv")
-              </code></pre>
-          </section>
-          <section>
-            <p>Gør noget med hver</p>
-            <pre><code class="python" data-trim>
-                names = ["Daniel", "Gustav", "William", "Bastian"]
-                # names er vores liste
-                # oneName er et navn af gangen
-                for oneName in names:
-                    print(oneName)
-              </code></pre>
-          </section>
-          <section>
-            <p>Vælg noget tilfældigt</p>
-            <pre><code class="python" data-trim>
-                import random
-                names = ["Jonas", "Andreas", "Coding Pirates"]
-
-                def pickOne():
-                    randNumber = random.randint(0, len(names)-1)
-                    print(names[randNumber])
-
-                pickOne()
-              </code></pre>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h3>Ændringer til gameLoop'et</h3>
-            <p>Vores gameloop har et problem</p>
-            <p>Når vi kører en kommando, gør den det én gang</p>
-            <p>
-              Det er fint til at bygge huse etc, men ikke hvis vi vil gøre det
-              samme igen og igen
-            </p>
-            <p>Lad os lige se hvad vi har</p>
-          </section>
-          <section>
-            <pre><code class="python" data-trim data-line-numbers="18-29">
+          <pre><code class="python" data-trim>
 import mcpi.minecraft as minecraft
 import mcpi.block as block
 import mcpi.entity as entity
@@ -129,22 +68,14 @@ import random
 from chat_handler import get_latest_message
 mc = minecraft.Minecraft.create()
 
-
-def build_tower():
-    mc.postToChat("Building a tower!")
-
-    pos = mc.player.getPos()
-    height = 10
-    mc.setBlocks(pos.x, pos.y, pos.z, pos.x, pos.y +
-                    height, pos.z, block.STONE.id)
-
 running = True
 
 while running:
     chat = get_latest_message(mc)
 
     if chat == "build_tower":
-        build_tower()
+        pos = mc.player.getPos()
+        mc.setBlocks(pos.x, pos.y, pos.z, pos.x, pos.y+8, pos.z, block.WOOD.id)
     if chat == "exit":
         mc.postToChat("Goodbye!")
         running = False
@@ -152,158 +83,37 @@ while running:
     time.sleep(0.1)
                 
                 </code></pre>
-          </section>
-          <section>
-            <p>
-              For at køre samme kode igen og igen, har vi brug for
-              "<code>state</code>"
-            </p>
-            <p>Ligesom vi har i <code>running</code></p>
-            <p class="fragment">og en betingelse</p>
-          </section>
-          <section>
-            <pre><code class="python" data-trim data-line-numbers="18-20|23|28-29|36-37">
-import mcpi.minecraft as minecraft
-import mcpi.block as block
-import mcpi.entity as entity
-import time
-import random
-from chat_handler import get_latest_message
-mc = minecraft.Minecraft.create()
-
-
-def build_tower():
-    mc.postToChat("Building a tower!")
-
-    pos = mc.player.getPos()
-    height = 10
-    mc.setBlocks(pos.x, pos.y, pos.z, pos.x, pos.y +
-                    height, pos.z, block.STONE.id)
-
-def walkOnGold():
-    pos = mc.player.getTilePos()
-    mc.setBlock(pos.x, pos.y-1, pos.z,block.GOLD_BLOCK.id)
-
-running = True
-walkingOnGold = False
-
-while running:
-    chat = get_latest_message(mc)
-
-    if chat == "walk on gold":
-        walkingOnGold=True
-    if chat == "build_tower":
-        build_tower()
-    if chat == "exit":
-        mc.postToChat("Goodbye!")
-        running = False
-
-    if walkingOnGold:
-        walkOnGold()
-    time.sleep(0.1)
-                                    
-                                    </code></pre>
-          </section>
-          <section>
-            <p>Lad os prøve at få det til at virke</p>
-          </section>
         </section>
         <section>
-          <section>
-            <h1>Walking on ???</h1>
-            <p>hvad så hvis det skal være tilfældigt?</p>
-            <p>Lad os lave noget pseudo-kode</p>
-            <p>Og så koder vi det sammen</p>
-          </section>
+          <h1>Betingelser</h1>
+          <h3><code>if - elif - else</code></h3>
         </section>
-        <!--
         <section>
-          <section>
-            <h3>Dagens udfordring</h2>
-                <p>Den følgende kode scanner området omkring spilleren</p>
-                <p>Hvis nu vi lavede en liste over hvad vi kan lide</p>
-                <p>Og får python til at fjerne alt der IKKE er i listen?</p>
-          </section>
-          
-          <section data-auto-animate>
-            <pre data-id="code-animation"><code class="python stretch" data-trim data-line-numbers>
-pos = mc.player.getTilePos()
-mod = 1
-xHigh = pos.x+mod
-xLow =  pos.x-mod
-yHigh = pos.y+mod
-yLow =  pos.y
-zHigh = pos.z+mod
-zLow =  pos.z-mod
+          <p>Kode er stort set altid bygget op af betingelser</p>
+          <p>Hvis X sker, så gør Y</p>
+          <p>Har i eksempler?</p>
+        </section>
+        <section>
+          <p>I Python ser det således ud</p>
+          <pre><code class="python">
+              age = 10
+              if age > 17:
+                print("Du må køre bil")
+              elif age > 6:
+                print("Du går nok i skole")
+              else:
+                print("Børnehave?")
+        
             </code></pre>
-          </section>
-          <section data-auto-animate>
-            <pre data-id="code-animation"><code class="python stretch" data-trim data-line-numbers="9-13">
-pos = mc.player.getTilePos()
-mod = 1
-xHigh = pos.x+mod
-xLow =  pos.x-mod
-yHigh = pos.y+mod
-yLow =  pos.y
-zHigh = pos.z+mod
-zLow =  pos.z-mod
-y_list = list(range(yHigh-yLow+1))
-y_list.reverse()
-for y in y_list:
-    for x in range(xHigh - xLow+1):
-        for z in range(zHigh-zLow+1):    
-            </code></pre>
-          </section>
-          <section data-auto-animate>
-            <pre data-id="code-animation"><code class="python stretch" data-trim data-line-numbers="14-18">
-pos = mc.player.getTilePos()
-mod = 1
-xHigh = pos.x+mod
-xLow =  pos.x-mod
-yHigh = pos.y+mod
-yLow =  pos.y
-zHigh = pos.z+mod
-zLow =  pos.z-mod
-y_list = list(range(yHigh-yLow+1))
-y_list.reverse()
-for y in y_list:
-    for x in range(xHigh - xLow+1):
-        for z in range(zHigh-zLow+1):   
-            tx = xLow + x
-            ty = yLow + y
-            tz = zLow + z
-            block = mc.getBlock(tx, ty, tz)
-            mc.setBlock(tx, ty, tz, 0)
-            </code></pre>
-          </section>
-          <section data-auto-animate>
-            <pre data-id="code-animation"><code class="python stretch" data-trim data-line-numbers="1|0">
-def clearBlocks():    
-    pos = mc.player.getTilePos()
-    mod = 1
-    xHigh = pos.x+mod
-    xLow =  pos.x-mod
-    yHigh = pos.y+mod
-    yLow =  pos.y
-    zHigh = pos.z+mod
-    zLow =  pos.z-mod
-    y_list = list(range(yHigh-yLow+1))
-    y_list.reverse()
-    for y in y_list:
-        for x in range(xHigh - xLow+1):
-            for z in range(zHigh-zLow+1):   
-                tx = xLow + x
-                ty = yLow + y
-                tz = zLow + z
-                block = mc.getBlock(tx, ty, tz)
-                mc.setBlock(tx, ty, tz, 0)
-            </code></pre>
-          </section>
-          <section>
-            <p>Lad os prøve det</p>
-            <p><a href="https://github.com/andreasschmidtjensen/programmering-med-minecraft" target="_blank">Kode-skelet →</a></p>
-          </section>
-        </section>-->
+          <p class="fragment">
+            De tre betingelser er afhængige af hinanden, de bliver tjekket en af
+            gangen. Og når først en er sand (<code>True</code>), gider Python
+            ikke tjekke resten
+          </p>
+        </section>
+        <section>
+          <h3>Lad os prøve det</h3>
+        </section>
       </div>
     </div>
 

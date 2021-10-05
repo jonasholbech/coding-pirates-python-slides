@@ -22,14 +22,12 @@ pos = mc.player.getPos()
 
 mc.setBlocks(x1, y1, z1, x2, y2, z2, block.WOOD.id)
      
-
 while True:
       pos = mc.player.getPos()
       mc.setBlock(pos.x, pos.y, pos.z, block.TNT.id)
       time.sleep(0.1)
 
 import random
-
 myNumber = random.randint(1, 10)
 
 age = 10
