@@ -28,86 +28,116 @@
           <h1>Minecraft &amp; Python, dag 7</h1>
         </section>
         <section>
-          <h1>Dagens tema: Udfordring!</h1>
-        </section>
-        <section>
           <ol>
             <li>Goddag</li>
-            <li>Lektier fra sidst</li>
-            <li>Udfordring</li>
+            <li>Funktioner</li>
+            <li>Individuelle øvelser</li>
             <li>Lektier til næste gang</li>
           </ol>
         </section>
         <section>
-          <h2>Lektier fra sidst</h2>
-          <p>Har alle lavet deres?</p>
+          <img data-src="gfx/coordinate-system.png" alt="" />
+        </section>
+
+        <section>
+          <h3>Lad os bygge tårne</h3>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|3-5|6|7-11">
+          # første tårn - 10 blokke
+          pos = mc.player.getPos()
+          mc.setBlocks(pos.x, pos.y, pos.z, 
+                        pos.x, pos.y + 10, pos.z, block.STONE.id)
+          mc.setBlock(pos.x, pos.y + 11, pos.z, block.GOLD_BLOCK.id)
+          time.sleep(5)
+          # andet tårn - 15 blokke
+          pos = mc.player.getPos()
+          mc.setBlocks(pos.x, pos.y, pos.z, 
+                        pos.x, pos.y + 15, pos.z, block.STONE.id)
+          mc.setBlock(pos.x, pos.y + 16, pos.z, block.GOLD_BLOCK.id)
+          ...
+        </code></pre>
+        </section>
+        <section data-transition="none">
+          <h3>Lad os bygge tårne</h3>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="7|8-12|0">
+          ...
+          # andet tårn - 15 blokke
+          pos = mc.player.getPos()
+          mc.setBlocks(pos.x, pos.y, pos.z, 
+                        pos.x, pos.y + 15, pos.z, block.STONE.id)
+          mc.setBlock(pos.x, pos.y + 16, pos.z, block.GOLD_BLOCK.id)
+          time.sleep(5)
+          # tredje tårn - 20 blokke
+          pos = mc.player.getPos()
+          mc.setBlocks(pos.x, pos.y, pos.z, 
+                        pos.x, pos.y + 20, pos.z, block.STONE.id)
+          mc.setBlock(pos.x, pos.y + 21, pos.z, block.GOLD_BLOCK.id)
+        </code></pre>
         </section>
         <section>
-          <section>
-            <h1>Udfordring!</h1>
-            <h3>Det er tid til at vise hvad I har lært</h3>
-          </section>
-          <section>
-            <h3>... og det er ikke så lidt</h3>
-            <ul>
-              <li>Brug af API'et: <code>setPos, setBlocks</code></li>
-              <li>Funktioner: <code>def</code></li>
-              <li>Tilfældighed: <code>import random</code></li>
-              <li>Betingelser: <code>if, elif, else</code></li>
-              <li>Begivenheder: <code>get_latest_message()</code></li>
-              <li>Lister: <code>[1, 2, 3]</code></li>
-            </ul>
-          </section>
-          <section>
-            <h3>Opgave 1</h3>
-          
-            <div>
-              Byg funktionen <code>placer_guld()</code>, som kan placere guld hele vejen rundt om spilleren.
-            </div>
-
-            <p class="fragment" style="color: #1b91ff">
-              <small><b>Hint:</b><br/> <code>def placer_guld()</code></small>
-            </p>
-          </section>
-          <section>
-            <h3>Opgave 2</h3>
-          
-            <div>
-              Udbyg funktionen til at tage et parameter <code>blockType</code>, så man kan vælge hvilken blok der skal placeres rundt om spilleren.
-            </div>
-
-            <p class="fragment" style="color: #1b91ff">
-              <small><b>Hint:</b><br/> <code>def placer_guld(blockType)</code></small>
-            </p>
-          </section>
-          <section>
-            <h3>Opgave 3</h3>
-
-            <div>
-              Byg et game loop så man kan skrive "placer guld" i chatten, og så køres funktionen.
-            </div>
-
-            <p class="fragment" style="color: #1b91ff">
-              <small><b>Hint 1:</b><br/> <code>chat = get_latest_message(mc)</code></small>
-            </p>
-            <p class="fragment" style="color: #1b91ff">
-              <small><b>Hint 2:</b><br/> <code>if chat == "placer guld"</code></small>
-            </p>
-          </section>
-          <section>
-            <h4>Opgave 4</h4>
-            
-            <div>
-              Udvid jeres game loop, så man kan skrive "placer blokke" i chatten, og så køres funktionen med en tilfældig blok fra en liste af udvalgte blokke.
-            </div>
-
-            <p class="fragment" style="color: #1b91ff">
-              <small><b>Hint 1:</b><br/> <code>blocks = [block.STONE.id, block.GOLD.id, block.LAVA.id]</code></small>
-            </p>
-            <p class="fragment" style="color: #1b91ff">
-              <small><b>Hint 2:</b><br/> <code>randNumber = random.randint(0, len(blocks)-1)</code></small>
-            </p>
-          </section>
+          <h3>Kan vi gøre noget smartere?</h3>
+        </section>
+        <section>
+          <h3>Don't repeat yourself</h3>
+          <h6>Funktioner</h6>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2|3-5|6-7|0">
+def build_tower(height):
+    pos = mc.player.getPos()
+    mc.setBlocks(pos.x, pos.y, pos.z, 
+                 pos.x, pos.y + height, pos.z, 
+                 block.STONE.id)
+    mc.setBlock(pos.x, pos.y + height + 1, pos.z, 
+                block.GOLD_BLOCK.id)
+        </code></pre>
+        </section>
+        <section>
+          <h3>Lad os bygge tårne - igen</h3>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1-2|4-5|7-8|0">
+            # første tårn - 10 blokke
+            build_tower(10)
+            time.sleep(5)
+            # andet tårn - 15 blokke            
+            build_tower(15)
+            time.sleep(5)
+            # tredje tårn - 20 blokke            
+            build_tower(20)
+          </code></pre>
+        </section>
+        <section>
+          <p>Lad os lege lidt med funktioner</p>
+        </section>
+        <section>
+          <h3>Øvelse</h3>
+          <ol>
+            <li>Lav en ny fil</li>
+            <li>Husk starter koden</li>
+            <li>Skriv funktionen <code>build_tower</code></li>
+            <li>Brug den!</li>
+          </ol>
+        </section>
+        <section>
+          <h3>Organiser din kode</h3>
+          <h6>tower_builder.py</h6>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|2|3-8|1|0">
+          import mcpi.block as block
+          def build_tower(mc, height):
+              pos = mc.player.getPos()
+              mc.setBlocks(pos.x, pos.y, pos.z, 
+                           pos.x, pos.y + height, pos.z, 
+                           block.STONE.id)
+              mc.setBlock(pos.x, pos.y + height + 1, pos.z, 
+                          block.GOLD_BLOCK.id)
+        </code></pre>
+          <h6>game.py</h6>
+          <pre><code class="python" data-trim data-noescape data-line-numbers="0|1|2-3|4">
+          import tower_builder
+          import mcpi.minecraft as minecraft
+          mc = minecraft.Minecraft.create()
+          tower_builder.build_tower(mc, 10)
+        </code></pre>
+        </section>
+        <section>
+          <h3>Øvelse</h3>
+          <h6>Kan vi give vores tårne forskellige typer top?</h6>
         </section>
       </div>
     </div>
